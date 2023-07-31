@@ -266,7 +266,7 @@ def get_t5_summary(custom_text, percentage):
 
 def get_t5_fine_tuned_summary(custom_text, percentage):
 
-    model = AutoModelForSeq2SeqLM.from_pretrained("/content/drive/MyDrive/t5_transfer_learning/model")
+    model = AutoModelForSeq2SeqLM.from_pretrained("/content/drive/MyDrive/aroha/t5_transfer_learning/model")
     tokenizer = AutoTokenizer.from_pretrained("t5-base")
 
 
