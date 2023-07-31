@@ -1,2 +1,6 @@
 articles_string.zip
 article.parquet
+*.h5
+t5_fine_tuned/t5_transfer_learning/model/*
+t5_fine_tuned/t5_transfer_learning/results/checkpoint-*/*
+t5_fine_tuned/t5_transfer_learning/logs/*
