@@ -4,3 +4,4 @@ article.parquet
 t5_fine_tuned/t5_transfer_learning/model/*
 t5_fine_tuned/t5_transfer_learning/results/checkpoint-*/*
 t5_fine_tuned/t5_transfer_learning/logs/*
+llama2_fine_tuned/llama2_query_tuning/

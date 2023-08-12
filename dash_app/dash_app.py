@@ -15,21 +15,27 @@ from transformers import BartTokenizer, BartForConditionalGeneration
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 from transformers import AutoTokenizer, AutoModelForSeq2SeqLM
 from transformers import AutoModelForCausalLM
+from peft import PeftModel, PeftConfig
+from transformers import pipeline
 
 import nltk
 import re
 import math
 import contractions
 import string
+import pickle
+import json
 import networkx as nx
 from nltk.stem import WordNetLemmatizer
 from sklearn.decomposition import TruncatedSVD
-from nltk.corpus import stopwords
+from nltk.corpus import stopwords, wordnet
 from nltk.tokenize import sent_tokenize,word_tokenize
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.feature_extraction.text import TfidfVectorizer
 from langchain import HuggingFacePipeline
 from langchain import PromptTemplate,  LLMChain
+from tensorflow.keras.models import load_model
+from tensorflow.keras.preprocessing.sequence import pad_sequences
 
 
 # read all parquet files from a folder containing multiple parquet files in pandas dataframe
@@ -81,6 +87,16 @@ llama2_tokenizer = AutoTokenizer.from_pretrained(llama2_model_name,
 llama2_model = AutoModelForCausalLM.from_pretrained(llama2_model_name, 
                                             use_auth_token=llama2_access_token, 
                                             cache_dir="/content/drive/MyDrive/aroha/llama2_cache")
+
+
+
+peft_model_id = "/content/drive/MyDrive/aroha/llama2_fine_tuned/model"
+
+
+peft_model = PeftModel.from_pretrained(llama2_model, peft_model_id)
+
+seq2seq_encoder_model = load_model('/content/drive/MyDrive/aroha/seq2seq_pg/encoder_model.h5')
+seq2seq_decoder_model = load_model('/content/drive/MyDrive/aroha/seq2seq_pg/decoder_model.h5')
 
 def get_summary(article):
     """
@@ -401,6 +417,128 @@ def get_llama2_summary(custom_text, percentage):
     input_args = {'text': custom_text, 'percent': percentage}
     return llm_chain.run(input_args)
 
+
+def pre_process_llama2_fine_tuned_text(text):
+    text = text.lower()
+    text = text.translate(str.maketrans("", "", string.punctuation))
+    text = re.sub(r"[^\w\s]", "", text)
+    return text
+
+def post_process_llama2_fine_tuned_text(text):
+    idx = text.find("### Summary:")
+    if idx != -1:
+        text = text[idx+len("### Summary:"):]
+    sentences = re.split(r'(?<!\w\.\w.)(?<![A-Z][a-z]\.)(?<=\.|\?)\s', text)
+    unique_sentences = list(dict.fromkeys(sentences))
+    return ' '.join(unique_sentences)
+
+def get_llama2_fine_tuned_summary(custom_text, percentage):
+
+    # Tokenize and truncate the sample_article to 500 tokens
+    tokens = llama2_tokenizer.tokenize(pre_process_llama2_fine_tuned_text(custom_text))
+    truncated_tokens = tokens[:500]
+    truncated_article = '### Article:' + llama2_tokenizer.decode(llama2_tokenizer.convert_tokens_to_ids(truncated_tokens)) + '\n ### Summary:'
+
+    output_length = math.ceil(500 * (percentage / 100))
+    
+    device = 0  # This assumes you're using GPU 0. Adjust if necessary.
+    pipe = pipeline(task="text-generation", model=peft_model.to(device), tokenizer=llama2_tokenizer, device=device, max_length=1000)
+
+    # Generate the summary using the truncated article
+    result = pipe(truncated_article)
+
+    # Extract and print the generated output
+    generated_output = result[0]['generated_text']
+    return llama2_tokenizer.decode(llama2_tokenizer.convert_tokens_to_ids(llama2_tokenizer.tokenize(post_process_llama2_fine_tuned_text(generated_output))[:output_length]))
+
+
+
+def preprocess_seq2seq_text(text):
+    text = text.lower()
+    text = text.translate(str.maketrans("", "", string.punctuation))
+    text = re.sub(r'\.(?=[^ \W\d])', '. ', str(text))
+    text = re.sub(r"[^\w\s]", "", text)
+    text = " ".join([single_word.strip() for single_word in text.split()])
+    text = ''.join([char for char in text if char.isalpha() or char.isspace()])
+    tokens = word_tokenize(text)
+    stop_words = set(stopwords.words('english'))
+    tokens = [token for token in tokens if token not in stop_words]
+    lemmatizer = WordNetLemmatizer()
+    tokens = [lemmatizer.lemmatize(token, wordnet.VERB) for token in tokens]
+    preprocessed_text = ' '.join(tokens)
+    preprocessed_text = contractions.fix(preprocessed_text)
+    return preprocessed_text
+
+
+def decode_sequence(input_seq, summary_tokenizer, article_tokenizer, summary_vocabulary):
+    summary_max_len = 50
+    # Encode the input as state vectors
+    e_out, e_h, e_c = seq2seq_encoder_model.predict(input_seq)
+
+    # Generate empty target sequence of length 1
+    target_seq = np.zeros((1,1))
+
+    # Populate the first word of target sequence with the start word
+    target_seq[0, 0] = summary_tokenizer.word_index['<start>']
+
+    stop_condition = False
+    decoded_sentence = ''
+    while not stop_condition:
+        output_tokens, h, c = seq2seq_decoder_model.predict([target_seq, input_seq, e_out] + [e_h, e_c])
+
+        # Sample a token
+        final_prob_index = np.argmax(output_tokens[0, -1, :])
+
+        # Distinguish between generated and copied words based on final_prob_index
+        if final_prob_index < len(summary_vocabulary):
+            # It's a generated word
+            sampled_token = summary_tokenizer.index_word[final_prob_index]
+        else:
+            # It's a copied word
+            copied_word_index = final_prob_index - len(summary_vocabulary)
+            sampled_token = article_tokenizer.index_word[input_seq[0, copied_word_index]]
+
+        if(sampled_token!='<end>'):
+            decoded_sentence += ' ' + sampled_token
+
+        # Exit condition: either hit max length or find stop word
+        if (sampled_token == '<end>' or len(decoded_sentence.split()) >= (summary_max_len-1)):
+            stop_condition = True
+
+        # Update the target sequence (of length 1)
+        target_seq = np.zeros((1,1))
+        target_seq[0, 0] = summary_tokenizer.word_index[sampled_token] if sampled_token in summary_tokenizer.word_index else summary_tokenizer.word_index['<unknown>']
+
+        # Update internal states
+        e_h, e_c = h, c
+
+    return decoded_sentence
+
+
+def get_seq2seq_summary(custom_text, percentage):
+    with open('/content/drive/MyDrive/aroha/seq2seq_pg/summary_tokenizer.pickle', 'rb') as handle:
+        summary_tokenizer = pickle.load(handle)
+
+    with open('/content/drive/MyDrive/aroha/seq2seq_pg/article_tokenizer.pickle', 'rb') as handle:
+        article_tokenizer = pickle.load(handle)
+    
+    with open('/content/drive/MyDrive/aroha/seq2seq_pg/summary_vocabulary.json', 'r') as file:
+        summary_vocabulary = json.load(file)
+
+    custom_text = preprocess_seq2seq_text(custom_text)
+    
+    new_word = "<unknown>"
+    index = 0
+    summary_tokenizer.word_index[new_word] = index
+    summary_tokenizer.index_word[index] = new_word
+    
+    article_max_len = 500
+    article = custom_text
+    article = '<start> ' + article + ' <end>'
+    sequence = article_tokenizer.texts_to_sequences([article])
+    sequence_padded = pad_sequences(sequence, maxlen=article_max_len, padding='post')
+    return decode_sequence(sequence_padded, summary_tokenizer, article_tokenizer, summary_vocabulary)
+
 # Function to get the article content from the selected suggestion
 def get_article_content(suggestion_value, visible_paragraphs):
     if suggestion_value:
@@ -535,6 +673,8 @@ app.layout = html.Div([
             {'label': 't5 fine tuned', 'value': 't5 fine tuned'},
             {'label': 'bart', 'value': 'bart'},
             {'label': 'llama2', 'value': 'llama2'},
+            {'label': 'llama2 fine tuned', 'value': 'llama2 fine tuned'},
+            {'label': 'Seq2Seq', 'value': 'Seq2Seq'},
         ],
         value='',
         style={'width': '50%', 'margin': '0 auto'},
@@ -742,6 +882,10 @@ def update_summary(n_clicks, model, percentage, custom_text):
                 return get_t5_fine_tuned_summary(custom_text, percentage)
             elif model == 'llama2':
                 return get_llama2_summary(custom_text, percentage)
+            elif model == 'llama2 fine tuned':
+                return get_llama2_fine_tuned_summary(custom_text, percentage)
+            elif model == 'Seq2Seq':
+                return get_seq2seq_summary(custom_text, percentage)
         else:
             warning_style = {'color': 'red'}
             warning_msg = "Please provide all necessary inputs to generate the summary."
