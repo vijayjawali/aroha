@@ -37,6 +37,9 @@ from langchain import PromptTemplate,  LLMChain
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.sequence import pad_sequences
 
+import smtplib
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 # read all parquet files from a folder containing multiple parquet files in pandas dataframe
 named_entities = pd.read_parquet('/content/drive/MyDrive/aroha/eda/named_entities/', engine='pyarrow')
@@ -231,6 +234,21 @@ def get_text_rank_summary(custom_text, percentage):
     ranked_sentences = sorted(((scores[i], s) for i, s in enumerate(sentence_tokens)), reverse=True)
     sentence_array = [sentence[1] for sentence in ranked_sentences[:top_n]]
     return ''.join([''.join(sentence) for sentence in sentence_array])
+
+def get_topic_tf_idf_summary(summaries, topic, percentage):
+    
+    processed_summaries = [preprocess_tf_idf_text(summary) for summary in summaries]
+    top_n=math.ceil(len(summaries) * (percentage/100))
+    
+    tfidf_vectorizer = TfidfVectorizer()
+    tfidf_matrix = tfidf_vectorizer.fit_transform([topic] + processed_summaries)
+    cosine_similarities = cosine_similarity(tfidf_matrix[0], tfidf_matrix[1:]).flatten()
+    sorted_indices = sorted(range(len(cosine_similarities)), key=lambda i: cosine_similarities[i], reverse=True)
+    ranked_summaries = [(summaries[i], cosine_similarities[i]) for i in sorted_indices]
+    
+    top_ranked_summaries = ranked_summaries[:top_n]
+    
+    return "\n\n".join([f"{summary}" for rank, (summary, similarity) in enumerate(top_ranked_summaries, start=1)])
 
 def get_lsa_summary(custom_text, percentage):
     processed_article,sentence_tokens = preprocess_text_rank_lsa_text(custom_text)
@@ -563,6 +581,13 @@ def calculate_rouge_scores(original_text, summary_text):
     scores = rouge.get_scores(summary_text, original_text, avg=True)
     return scores
 
+def get_topic_summaries(suggestion_value):
+    if suggestion_value:
+        ids = get_ids(suggestion_value)[-10:]
+        article_content = get_summaries(get_articles(ids))
+        return article_content
+    return None
+
 external_stylesheets = [
     'https://codepen.io/chriddyp/pen/bWLwgP.css',
 ]
@@ -653,6 +678,66 @@ app.layout = html.Div([
     ], style={'float': 'right', 'width': '70%'}),
     html.Br(),
     html.Br(),
+        html.Br(),
+    html.Hr(style={'border-top': '1px solid #000000', 'width': '100%'}),
+    html.Br(),
+    html.H3(children='Select an entity to get topic summary using BART model',
+            style={'textAlign': 'center', 'color': '#000205'}),
+    html.H4(children='Search Entity : ',
+            style={'color': '#000205'}),
+    html.Div(children=[
+    html.Div([
+        dcc.Input(
+            id='my-topic-input',
+            type='text',
+            value='',
+            placeholder='Type here...',
+            autoComplete='off',
+            style={'float': 'left', 'width': '100%', 'margin-right': '20px'}
+        ),
+        html.Br(),
+        html.Br(),
+        html.Br(),
+        dcc.Loading(
+            id="loading-topic-suggestions-container",
+            type="circle",
+            children=[html.Div(id='topic-suggestions-container', style={'float': 'left', 'width': '100%'})],
+            style={'textAlign': 'left', 'width': '100%'}
+        ),
+    ]),
+    html.Div([
+        html.Div(id='topic-entity-selected', style={'text-align': 'center', 'margin': '0 auto'}),
+        html.H5(children='Select percentage of text to retain in the summary',
+                style={'textAlign': 'center', 'color': '#000205'}),
+        dcc.Slider(
+            id='topic-percentage-slider',
+            min=10, 
+            max=90,  
+            step=1,  
+            value=None,  
+            marks={i: f"{i}%" for i in range(10, 91, 10)},  
+            included=False,  
+            tooltip={'placement': 'bottom'}  
+        ),
+        html.Br(),
+        dcc.Input(id="email-input", type="email", placeholder="Enter your email"),
+        html.Div(id="validation-output"),
+        html.Br(),
+        html.Button("Submit", id="submit-button", disabled=True, n_clicks=0),
+        html.Br(),
+        html.Div(id='topic-email-confirmation', style={'text-align': 'center', 'margin': '0 auto'}),
+        # html.Div(id='topic-email-summary',children='', style={'text-align': 'center', 'margin': '0 auto'}),
+        html.Br(),
+        dcc.Loading(
+            id="loading-topic-email-summary",
+            type="default",
+            children=[html.Div(id='topic-email-summary',children='', style={'text-align': 'center', 'margin': '0 auto'})],
+            style={'textAlign': 'left', 'width': '70%'}
+        ),
+        ], style={'float': 'right', 'width': '70%', 'margin-left': '20px'}),
+    ], style={'display': 'flex', 'justifyContent': 'space-between'}),
+    dcc.Store(id='selected-topic-value', data=None),
+    dcc.Store(id='generate-topic-summary', data=False),
     html.Br(),
     html.Br(),
     html.Hr(style={'border-top': '1px solid #000000', 'width': '100%', 'margin-top': '20px', 'margin-bottom': '20px'}),
@@ -934,6 +1019,107 @@ def show_rouge_scores(n_clicks, original_text, summary_text):
 
         return table
     return None
+
+@app.callback(
+    Output('topic-suggestions-container', 'children'),
+    [Input('my-topic-input', 'value')],
+    [State('my-topic-input', 'id')]
+)
+def update_topic_suggestions(value, input_id):
+    if value:
+        filtered_suggestions = [s for s in unique_entities if str(s).lower().startswith(value.lower())]
+        if filtered_suggestions:
+            # Check if the number of filtered suggestions is more than 10
+            if len(filtered_suggestions) > 10:
+                # Wrap the RadioItems in a Div with scrollable style
+                return html.Div(
+                    dcc.RadioItems(
+                        id={'type': 'topic-suggestion', 'index': 'ALL'},
+                        options=[{'label': str(s), 'value': str(s)} for s in filtered_suggestions],
+                        labelStyle={'display': 'block', 'margin-bottom': '5px'},
+                        value=''
+                    ),
+                    style={'max-height': '500px', 'overflow': 'scroll'}
+                )
+            else:
+                # Display all suggestions if they are less than or equal to 10
+                return dcc.RadioItems(
+                    id={'type': 'topic-suggestion', 'index': 'ALL'},
+                    options=[{'label': str(s), 'value': str(s)} for s in filtered_suggestions],
+                    labelStyle={'display': 'block', 'margin-bottom': '5px'},
+                    value=''
+                )
+    return None
+
+@app.callback(
+    Output('topic-entity-selected', 'children'),
+    Output('selected-topic-value', 'data'),
+    [Input({'type': 'topic-suggestion', 'index': 'ALL'}, 'value')]
+)
+def update_topic_output(suggestion_value):
+    if suggestion_value:
+        return  html.H3('Entity Selected is: ' + str(suggestion_value),
+                       style={'textAlign': 'center', 'color': '#000205'}), suggestion_value
+    return None, None
+    
+@app.callback(
+    [Output("validation-output", "children"),
+     Output("submit-button", "disabled"),
+     Output("submit-button", "style")],
+    [Input("email-input", "value")]
+)
+def validate_email(email):
+    if email:
+        if re.match(r"[^@]+@[^@]+\.[^@]+", email):
+            return html.Div("Valid email", style={"color": "green"}), False, {'border-color': 'green'}
+        else:
+            return html.Div("Invalid email", style={"color": "red"}), True, {'border-color': 'red'}
+    else:
+        return "", True, None
+
+@app.callback(
+    Output("topic-email-confirmation", "children"),
+    Output("submit-button", "n_clicks"),
+    Output('generate-topic-summary', 'data'),
+    [Input("submit-button", "disabled"),
+     Input("email-input", "value"),
+     Input('submit-button', 'n_clicks'), 
+     Input('selected-topic-value', 'data'), 
+     Input('topic-percentage-slider', 'value')]
+)
+def send_confirmation(email_validation, email, n_clicks, topic, percentage):
+    if not email_validation and email and n_clicks > 0 and percentage:
+        return html.H5("Email on topic: " + topic + " will be sent to: " + email, style={'textAlign': 'center', 'color': 'green'}), 0, True
+    return None, n_clicks, False
+
+@app.callback(
+    Output("topic-email-summary", "children"),
+    [Input("submit-button", "disabled"),
+     Input("email-input", "value"), 
+     Input('selected-topic-value', 'data'), 
+     Input('generate-topic-summary', 'data'), 
+     Input('topic-percentage-slider', 'value')]
+)
+def get_topic_summary_from_confirmation(email_validation, to_email, topic, generate_topic_summary, percentage):
+    if not email_validation and to_email and topic and generate_topic_summary:
+        from_email = 'textsummarisationsmtp@gmail.com'
+        app_password = 'puuq lbcw nlmc zlcm'
+        msg = MIMEMultipart()
+        msg['From'] = from_email
+        msg['To'] = to_email
+        msg['Subject'] = 'Topic Summary on: ' + topic
+        try:
+            with smtplib.SMTP('smtp.gmail.com', 587) as server:
+                server.starttls()
+                server.login(from_email, app_password)
+                topic_summaries = get_topic_summaries(topic)
+                # topic_summaries = ''.join(topic_summaries)
+                topic_summaries = get_topic_tf_idf_summary(topic_summaries, topic, percentage)
+                msg.attach(MIMEText(topic_summaries, 'plain'))
+                server.sendmail(from_email, to_email, msg.as_string())
+            return html.H5("Email on topic: " + topic + " has be sent to: " + to_email + " successfully", style={'textAlign': 'center', 'color': 'green'})
+        except Exception as e:
+            return html.H5("Failed to send email on topic: " + topic + " to: " + to_email + '\n' + 'Exception: ' + str(e), style={'textAlign': 'center', 'color': 'red'})
 
 if __name__ == '__main__':
     app.run_server()
