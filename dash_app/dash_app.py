@@ -235,20 +235,16 @@ def get_text_rank_summary(custom_text, percentage):
     sentence_array = [sentence[1] for sentence in ranked_sentences[:top_n]]
     return ''.join([''.join(sentence) for sentence in sentence_array])
 
-def get_topic_tf_idf_summary(summaries, topic, percentage):
+def get_topic_tf_idf_summary(summaries, topic):
     
     processed_summaries = [preprocess_tf_idf_text(summary) for summary in summaries]
-    top_n=math.ceil(len(summaries) * (percentage/100))
     
     tfidf_vectorizer = TfidfVectorizer()
     tfidf_matrix = tfidf_vectorizer.fit_transform([topic] + processed_summaries)
     cosine_similarities = cosine_similarity(tfidf_matrix[0], tfidf_matrix[1:]).flatten()
     sorted_indices = sorted(range(len(cosine_similarities)), key=lambda i: cosine_similarities[i], reverse=True)
     ranked_summaries = [(summaries[i], cosine_similarities[i]) for i in sorted_indices]
-    
-    top_ranked_summaries = ranked_summaries[:top_n]
-    
-    return "\n\n".join([f"{summary}" for rank, (summary, similarity) in enumerate(top_ranked_summaries, start=1)])
+    return "\n\n".join([f"{summary}" for rank, (summary, similarity) in enumerate(ranked_summaries, start=1)])
 
 def get_lsa_summary(custom_text, percentage):
     processed_article,sentence_tokens = preprocess_text_rank_lsa_text(custom_text)
@@ -581,11 +577,31 @@ def calculate_rouge_scores(original_text, summary_text):
     scores = rouge.get_scores(summary_text, original_text, avg=True)
     return scores
 
-def get_topic_summaries(suggestion_value):
+def get_topic_summaries(suggestion_value, percentage, num_articles, model):
     if suggestion_value:
-        ids = get_ids(suggestion_value)[-10:]
-        article_content = get_summaries(get_articles(ids))
-        return article_content
+        ids = get_ids(suggestion_value)[-num_articles:]
+        articles = get_articles(ids)
+        summaries = []
+        for article in articles:
+            if model == 'term frequency inverse document frequency':
+                summaries.append(get_tf_idf_summary(article, percentage))
+            elif model == 'text rank':
+                summaries.append(get_text_rank_summary(article, percentage))
+            elif model == 'latent semantic analysis':
+                summaries.append(get_lsa_summary(article, percentage))
+            elif model == 't5':
+                summaries.append(get_t5_summary(article, percentage))
+            elif model == 'bart':
+                summaries.append(get_bart_summary(article, percentage))
+            elif model == 't5 fine tuned':
+                summaries.append(get_t5_fine_tuned_summary(article, percentage))
+            elif model == 'llama2':
+                summaries.append(get_llama2_summary(article, percentage))
+            elif model == 'llama2 fine tuned':
+                summaries.append(get_llama2_fine_tuned_summary(article, percentage))
+            elif model == 'Seq2Seq':
+                summaries.append(get_seq2seq_summary(article, percentage))          
+        return summaries
     return None
 
 external_stylesheets = [
@@ -718,6 +734,38 @@ app.layout = html.Div([
             marks={i: f"{i}%" for i in range(10, 91, 10)},  
             included=False,  
             tooltip={'placement': 'bottom'}  
+        ),
+        html.Br(),
+            html.H5(children='Select model',
+            style={'textAlign': 'center', 'color': '#000205'}),
+        dcc.Dropdown(
+            id='topic-model-selection-dropdown',
+            options=[
+                {'label': 'term frequency inverse document frequency', 'value': 'term frequency inverse document frequency'},
+                {'label': 'text rank', 'value': 'text rank'},
+                {'label': 'latent semantic analysis', 'value': 'latent semantic analysis'},
+                {'label': 't5', 'value': 't5'},
+                {'label': 't5 fine tuned', 'value': 't5 fine tuned'},
+                {'label': 'bart', 'value': 'bart'},
+                {'label': 'llama2', 'value': 'llama2'},
+                {'label': 'llama2 fine tuned', 'value': 'llama2 fine tuned'},
+                {'label': 'Seq2Seq', 'value': 'Seq2Seq'},
+            ],
+            value='',
+            style={'width': '50%', 'margin': '0 auto'},
+        ),
+        html.Br(),
+        html.H5(children='Select size of the summary',
+                style={'textAlign': 'center', 'color': '#000205'}),
+        dcc.Dropdown(
+        id='topic-length-selection-dropdown',
+        options=[
+            {'label': 'short', 'value': 'short'},
+            {'label': 'medium', 'value': 'short'},
+            {'label': 'long', 'value': 'long'},
+        ],
+        value='',
+        style={'width': '50%', 'margin': '0 auto'},
         ),
         html.Br(),
         dcc.Input(id="email-input", type="email", placeholder="Enter your email"),
@@ -952,7 +1000,6 @@ def update_summary(n_clicks, model, percentage, custom_text):
 
     if n_clicks > 0:
         if custom_text and model and percentage:
-
             if model == 'term frequency inverse document frequency':
                 return get_tf_idf_summary(custom_text, percentage)
             elif model == 'text rank':
@@ -1098,25 +1145,33 @@ def send_confirmation(email_validation, email, n_clicks, topic, percentage):
      Input("email-input", "value"), 
      Input('selected-topic-value', 'data'), 
      Input('generate-topic-summary', 'data'), 
-     Input('topic-percentage-slider', 'value')]
+     Input('topic-percentage-slider', 'value'), 
+     Input('topic-length-selection-dropdown', 'value'), 
+     Input('topic-model-selection-dropdown', 'value')]
 )
-def get_topic_summary_from_confirmation(email_validation, to_email, topic, generate_topic_summary, percentage):
-    if not email_validation and to_email and topic and generate_topic_summary:
+def get_topic_summary_from_confirmation(email_validation, to_email, topic, generate_topic_summary, percentage, length, model):
+    if not email_validation and to_email and topic and generate_topic_summary and percentage and length and model:
         from_email = 'textsummarisationsmtp@gmail.com'
         app_password = 'puuq lbcw nlmc zlcm'
         msg = MIMEMultipart()
         msg['From'] = from_email
         msg['To'] = to_email
-        msg['Subject'] = 'Topic Summary on: ' + topic
+        msg['Subject'] = 'Topic Summary on: ' + topic + 'with model: ' + model
+        if length == 'short':
+            number_of_summaries = 5
+        elif length == 'medium':
+            number_of_summaries = 10
+        elif length == 'long':
+            number_of_summaries = 15
         try:
             with smtplib.SMTP('smtp.gmail.com', 587) as server:
                 server.starttls()
                 server.login(from_email, app_password)
-                topic_summaries = get_topic_summaries(topic)
-                # topic_summaries = ''.join(topic_summaries)
-                topic_summaries = get_topic_tf_idf_summary(topic_summaries, topic, percentage)
+                topic_summaries = get_topic_summaries(topic, percentage, number_of_summaries, model)
+                topic_summaries = get_topic_tf_idf_summary(topic_summaries, topic)
                 msg.attach(MIMEText(topic_summaries, 'plain'))
                 server.sendmail(from_email, to_email, msg.as_string())
+                server.quit()
             return html.H5("Email on topic: " + topic + " has be sent to: " + to_email + " successfully", style={'textAlign': 'center', 'color': 'green'})
         except Exception as e:
             return html.H5("Failed to send email on topic: " + topic + " to: " + to_email + '\n' + 'Exception: ' + str(e), style={'textAlign': 'center', 'color': 'red'})
