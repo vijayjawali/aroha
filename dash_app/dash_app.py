@@ -697,7 +697,7 @@ app.layout = html.Div([
         html.Br(),
     html.Hr(style={'border-top': '1px solid #000000', 'width': '100%'}),
     html.Br(),
-    html.H3(children='Select an entity to get topic summary using BART model',
+    html.H3(children='Select an entity to get topic summary',
             style={'textAlign': 'center', 'color': '#000205'}),
     html.H4(children='Search Entity : ',
             style={'color': '#000205'}),
@@ -760,9 +760,9 @@ app.layout = html.Div([
         dcc.Dropdown(
         id='topic-length-selection-dropdown',
         options=[
-            {'label': 'short', 'value': 'short'},
-            {'label': 'medium', 'value': 'short'},
-            {'label': 'long', 'value': 'long'},
+            {'label': 'short (5 articles)', 'value': 'short'},
+            {'label': 'medium (10 articles)', 'value': 'short'},
+            {'label': 'long (15 articles)', 'value': 'long'},
         ],
         value='',
         style={'width': '50%', 'margin': '0 auto'},
@@ -1172,7 +1172,7 @@ def get_topic_summary_from_confirmation(email_validation, to_email, topic, gener
                 msg.attach(MIMEText(topic_summaries, 'plain'))
                 server.sendmail(from_email, to_email, msg.as_string())
                 server.quit()
-            return html.H5("Email on topic: " + topic + " has be sent to: " + to_email + " successfully", style={'textAlign': 'center', 'color': 'green'})
+            return html.H5("Email on topic: " + topic + ", sent to: " + to_email + " successfully", style={'textAlign': 'center', 'color': 'green'})
         except Exception as e:
             return html.H5("Failed to send email on topic: " + topic + " to: " + to_email + '\n' + 'Exception: ' + str(e), style={'textAlign': 'center', 'color': 'red'})
 
