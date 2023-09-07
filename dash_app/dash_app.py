@@ -263,8 +263,6 @@ def get_lsa_summary(custom_text, percentage):
     return ''.join([''.join(sentence) for sentence in sentence_array])
 
 def get_t5_summary(custom_text, percentage):
-    # tokenizer = T5Tokenizer.from_pretrained("t5-base")
-    # model = T5ForConditionalGeneration.from_pretrained("t5-base")
     input_text = custom_text
     total_length = len(custom_text)
     summary_length = math.ceil(total_length * (percentage / 100))
@@ -304,11 +302,6 @@ def get_t5_summary(custom_text, percentage):
     return combined_summary
 
 def get_t5_fine_tuned_summary(custom_text, percentage):
-
-    # model = AutoModelForSeq2SeqLM.from_pretrained("/content/drive/MyDrive/aroha/t5_transfer_learning/model")
-    # tokenizer = AutoTokenizer.from_pretrained("t5-base")
-
-
     input_text = custom_text
     total_length = len(custom_text)
     summary_length = math.ceil(total_length * (percentage / 100))
@@ -348,9 +341,6 @@ def get_t5_fine_tuned_summary(custom_text, percentage):
     return combined_summary
 
 def get_bart_summary(custom_text, percentage):
-    # model_name = 'facebook/bart-large-cnn'
-    # tokenizer = BartTokenizer.from_pretrained(model_name)
-    # model = BartForConditionalGeneration.from_pretrained(model_name)
     input_text = custom_text
     total_length = len(custom_text)
     summary_length = math.ceil(total_length * (percentage / 100))
@@ -389,17 +379,6 @@ def get_bart_summary(custom_text, percentage):
     return combined_summary
 
 def get_llama2_summary(custom_text, percentage):
-    # model_name = "meta-llama/Llama-2-7b-chat-hf"
-    # access_token = "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"
-
-    # tokenizer = AutoTokenizer.from_pretrained(model_name, 
-    #                                         use_auth_token=access_token, 
-    #                                         cache_dir="/content/drive/MyDrive/aroha/llama2_cache"
-    #                                         )
-
-    # model = AutoModelForCausalLM.from_pretrained(model_name, 
-    #                                             use_auth_token=access_token, 
-    #                                             cache_dir="/content/drive/MyDrive/aroha/llama2_cache")
 
     device = 0 if torch.cuda.is_available() else -1
 
@@ -455,7 +434,7 @@ def get_llama2_fine_tuned_summary(custom_text, percentage):
 
     output_length = math.ceil(500 * (percentage / 100))
     
-    device = 0  # This assumes you're using GPU 0. Adjust if necessary.
+    device = 0
     pipe = pipeline(task="text-generation", model=peft_model.to(device), tokenizer=llama2_tokenizer, device=device, max_length=1000)
 
     # Generate the summary using the truncated article
@@ -641,7 +620,7 @@ app.layout = html.Div([
             value='',
             placeholder='Type here...',
             autoComplete='off',
-            style={'float': 'left', 'width': '20%', 'margin-right': '20px'}  # Adjust width and margins
+            style={'float': 'left', 'width': '20%', 'margin-right': '20px'}
         ),
         html.Br(),
         html.Br(),
@@ -774,7 +753,6 @@ app.layout = html.Div([
         html.Button("Submit", id="submit-button", disabled=True, n_clicks=0),
         html.Br(),
         html.Div(id='topic-email-confirmation', style={'text-align': 'center', 'margin': '0 auto'}),
-        # html.Div(id='topic-email-summary',children='', style={'text-align': 'center', 'margin': '0 auto'}),
         html.Br(),
         dcc.Loading(
             id="loading-topic-email-summary",
@@ -890,7 +868,7 @@ def update_suggestions(value, input_id):
                         labelStyle={'display': 'block', 'margin-bottom': '5px'},
                         value=''
                     ),
-                    style={'max-height': '500px', 'overflow': 'scroll'}  # Set the maximum height and scroll overflow
+                    style={'max-height': '500px', 'overflow': 'scroll'} 
                 )
             else:
                 # Display all suggestions if they are less than or equal to 10
