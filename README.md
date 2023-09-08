@@ -206,7 +206,7 @@ The Following flow represents the folder structure of the project
 		t5_tokenizer_cache_dir_path,/content/drive/MyDrive/aroha/t5_cache  
 		t5_model_cache_dir_path,/content/drive/MyDrive/aroha/t5_cache
 		t5_fine_tuned_model_path,/content/drive/MyDrive/aroha/t5_transfer_learning/model
-		llama2_access_token_path,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
+		llama2_access_token_path,XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 		llama2_tokenizer_cache_dir_path,/content/drive/MyDrive/aroha/llama2_cache
 		llama2_model_cache_dir_path,/content/drive/MyDrive/aroha/llama2_cache
 		peft_model_path,/content/drive/MyDrive/aroha/llama2_fine_tuned/model
@@ -218,7 +218,7 @@ The Following flow represents the folder structure of the project
 	
 	c. Contents for "named_entities" is available in eda folder
 	
-	d. Contents for "t5_fine_tuned_model_path" ia available at "t5_fine_tuned\t5_transfer_learning\model"
+	d. Contents for "t5_fine_tuned_model_path" ia available at "t5_transfer_learning\model" folder and can be accessed from https://drive.google.com/drive/folders/1HrrRRJdHtBRefazyLKB7PB1mXP-4rNsr?usp=sharing
 
 	e. "llama2_fine_tuned" model has been published to HuggingFace and can be downloaded directly
 
@@ -227,6 +227,8 @@ The Following flow represents the folder structure of the project
 		model = PeftModel.from_pretrained(model, "vijayjawali/llama2_query_tuned")
 	
 	f. Contents for summary_tokenizer_path, article_tokenizer_path and summary_vocabulary_path are avilable in seq2seq_pg folder
+
+	g. Contents for Encoder and Decoder models are available at https://drive.google.com/drive/folders/14TpP1ivxGL5WkOhVLXtc8I8hfkxKknCR?usp=sharing
 	
 4. Get Llama-2 Aceess from Meta and HuggingFace
 	
