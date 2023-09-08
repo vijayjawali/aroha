@@ -1,0 +1,15 @@
+named_entities,/content/drive/MyDrive/aroha/eda/named_entities/
+bart_tokenizer_cache_dir_path,/content/drive/MyDrive/aroha/bart_cache
+bart_model_cache_dir_path,/content/drive/MyDrive/aroha/bart_cache
+t5_tokenizer_cache_dir_path,/content/drive/MyDrive/aroha/t5_cache  
+t5_model_cache_dir_path,/content/drive/MyDrive/aroha/t5_cache
+t5_fine_tuned_model_path,/content/drive/MyDrive/aroha/t5_transfer_learning/model
+llama2_access_token_path,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
+llama2_tokenizer_cache_dir_path,/content/drive/MyDrive/aroha/llama2_cache
+llama2_model_cache_dir_path,/content/drive/MyDrive/aroha/llama2_cache
+peft_model_path,/content/drive/MyDrive/aroha/llama2_fine_tuned/model
+seq2seq_encoder_model_path,/content/drive/MyDrive/aroha/seq2seq_pg/encoder_model.h5
+seq2seq_decoder_model_path,/content/drive/MyDrive/aroha/seq2seq_pg/decoder_model.h5
+summary_tokenizer_path,/content/drive/MyDrive/aroha/seq2seq_pg/summary_tokenizer.pickle
+article_tokenizer_path,/content/drive/MyDrive/aroha/seq2seq_pg/article_tokenizer.pickle
+summary_vocabulary_path,/content/drive/MyDrive/aroha/seq2seq_pg/summary_vocabulary.json

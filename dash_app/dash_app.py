@@ -40,9 +40,98 @@ from tensorflow.keras.preprocessing.sequence import pad_sequences
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--config", type=str, required=True)
+args = parser.parse_args()
+
+config_file = args.config
+
+
+def findField(file, fieldName, allLines = []) -> str:
+    """
+    
+    finds the fields from the given input and returns a line in string format if the key is available in file else returns an empty string
+
+    Args:
+        file : input file to be processed
+        fieldName : name of key to search in file
+        allLines : an array of line string, each element corresponds to a single line in the file. Defaults to [].
+
+    Returns:
+        str: a line in string form containing the fieldname that is being searched int he file, empty when field name is not found
+    
+    >>> Example: 
+        file
+            ID,VM0010_Viso 
+            Name,Subj010_ 
+            Age,  0y     
+    >>> findField(file, 'ID')
+    >>> ,VM0010_Viso
+    >>> findField(file, 'address)
+    >>> ""
+    """
+    if not allLines:
+        allLines = file.readlines()
+            
+    
+    for currentLine in allLines:
+        if fieldName in currentLine:
+            currentLine = currentLine.split(fieldName)
+            return  ''.join(currentLine[1])
+    
+    return ""
+
+config = open(config_file, 'r', errors="ignore")
+
+named_entities_path = findField(config, "named_entities").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
+
+bart_tokenizer_cache_dir_path = findField(config, "bart_tokenizer_cache_dir_path").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
+
+bart_model_cache_dir_path = findField(config, "bart_model_cache_dir_path").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
+
+t5_tokenizer_cache_dir_path = findField(config, "t5_tokenizer_cache_dir_path").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
+
+t5_model_cache_dir_path = findField(config, "t5_model_cache_dir_path").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
+
+t5_fine_tuned_model_path = findField(config, "t5_fine_tuned_model_path").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
+
+llama2_access_token_path = findField(config, "llama2_access_token_path").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
+
+llama2_tokenizer_cache_dir_path = findField(config, "llama2_tokenizer_cache_dir_path").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
+
+llama2_model_cache_dir_path = findField(config, "llama2_model_cache_dir_path").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
+
+peft_model_path = findField(config, "peft_model_path").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
+
+seq2seq_encoder_model_path = findField(config, "seq2seq_encoder_model_path").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
+
+seq2seq_decoder_model_path = findField(config, "seq2seq_decoder_model_path").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
+
+summary_tokenizer_path = findField(config, "summary_tokenizer_path").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
+
+article_tokenizer_path = findField(config, "article_tokenizer_path").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
+
+summary_vocabulary_path = findField(config, "summary_vocabulary_path").lstrip(',').replace('\n','').lstrip().rstrip()
+config.seek(0)
 
 # read all parquet files from a folder containing multiple parquet files in pandas dataframe
-named_entities = pd.read_parquet('/content/drive/MyDrive/aroha/eda/named_entities/', engine='pyarrow')
+named_entities = pd.read_parquet(named_entities_path, engine='pyarrow')
 
 # seperate the list of named entities into seperate rows
 explode_df = named_entities.explode("named_entities").rename(columns={"named_entities": "entity"})
@@ -70,36 +159,32 @@ def get_articles(ids):
     return named_entities[named_entities['id'].isin(ids)]['article'].unique().tolist()
 
 # initialize the BART tokenizer and model
-bart_tokenizer = BartTokenizer.from_pretrained("facebook/bart-large-cnn", cache_dir="/content/drive/MyDrive/aroha/bart_cache")
-bart_model = BartForConditionalGeneration.from_pretrained("facebook/bart-large-cnn", cache_dir="/content/drive/MyDrive/aroha/bart_cache")
+bart_tokenizer = BartTokenizer.from_pretrained("facebook/bart-large-cnn", cache_dir=bart_tokenizer_cache_dir_path)
+bart_model = BartForConditionalGeneration.from_pretrained("facebook/bart-large-cnn", cache_dir=bart_model_cache_dir_path)
 
-t5_tokenizer = T5Tokenizer.from_pretrained("t5-base", cache_dir="/content/drive/MyDrive/aroha/t5_cache")
-t5_model = T5ForConditionalGeneration.from_pretrained("t5-base", cache_dir="/content/drive/MyDrive/aroha/t5_cache")
+t5_tokenizer = T5Tokenizer.from_pretrained("t5-base", cache_dir=t5_tokenizer_cache_dir_path)
+t5_model = T5ForConditionalGeneration.from_pretrained("t5-base", cache_dir=t5_model_cache_dir_path)
 
-t5_fine_tuned_model = AutoModelForSeq2SeqLM.from_pretrained("/content/drive/MyDrive/aroha/t5_transfer_learning/model")
+t5_fine_tuned_model = AutoModelForSeq2SeqLM.from_pretrained(t5_fine_tuned_model_path)
 
 
 llama2_model_name = "meta-llama/Llama-2-7b-chat-hf"
-llama2_access_token = "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"
+llama2_access_token = llama2_access_token_path
     
 llama2_tokenizer = AutoTokenizer.from_pretrained(llama2_model_name, 
                                         use_auth_token=llama2_access_token, 
-                                        cache_dir="/content/drive/MyDrive/aroha/llama2_cache"
+                                        cache_dir=llama2_tokenizer_cache_dir_path
                                         )
 
 llama2_model = AutoModelForCausalLM.from_pretrained(llama2_model_name, 
                                             use_auth_token=llama2_access_token, 
-                                            cache_dir="/content/drive/MyDrive/aroha/llama2_cache")
+                                            cache_dir=llama2_model_cache_dir_path)
 
 
+peft_model = PeftModel.from_pretrained(llama2_model, peft_model_path)
 
-peft_model_id = "/content/drive/MyDrive/aroha/llama2_fine_tuned/model"
-
-
-peft_model = PeftModel.from_pretrained(llama2_model, peft_model_id)
-
-seq2seq_encoder_model = load_model('/content/drive/MyDrive/aroha/seq2seq_pg/encoder_model.h5')
-seq2seq_decoder_model = load_model('/content/drive/MyDrive/aroha/seq2seq_pg/decoder_model.h5')
+seq2seq_encoder_model = load_model(seq2seq_encoder_model_path)
+seq2seq_decoder_model = load_model(seq2seq_decoder_model_path)
 
 def get_summary(article):
     """
@@ -509,13 +594,13 @@ def decode_sequence(input_seq, summary_tokenizer, article_tokenizer, summary_voc
 
 
 def get_seq2seq_summary(custom_text, percentage):
-    with open('/content/drive/MyDrive/aroha/seq2seq_pg/summary_tokenizer.pickle', 'rb') as handle:
+    with open(summary_tokenizer_path, 'rb') as handle:
         summary_tokenizer = pickle.load(handle)
 
-    with open('/content/drive/MyDrive/aroha/seq2seq_pg/article_tokenizer.pickle', 'rb') as handle:
+    with open(article_tokenizer_path, 'rb') as handle:
         article_tokenizer = pickle.load(handle)
     
-    with open('/content/drive/MyDrive/aroha/seq2seq_pg/summary_vocabulary.json', 'r') as file:
+    with open(summary_vocabulary_path, 'r') as file:
         summary_vocabulary = json.load(file)
 
     custom_text = preprocess_seq2seq_text(custom_text)
