@@ -177,8 +177,8 @@ The Following flow represents the folder structure of the project
 
 1. Fist step is to install the following python libraries from the pip command
 
-	python -m pip install -U pip
-	pip install -r requirements.txt
+		python -m pip install -U pip
+		pip install -r requirements.txt
 	
 	a. To run individual summarisation model, navigate to the specific folder and install packages from the specific requirements.txt file
 	
@@ -186,76 +186,89 @@ The Following flow represents the folder structure of the project
 	
 2. Download CNN/Dailymail dataset from HuggingFace using either the curl command or python library
 	
-	a. Curl Command : curl -X GET \
-     "https://datasets-server.huggingface.co/splits?dataset=cnn_dailymail"
+	a. Curl Command : 
+		
+		curl -X GET \ "https://datasets-server.huggingface.co/splits?dataset=cnn_dailymail"
 	b. Python Library :
+
 		from datasets import load_dataset
 		dataset = load_dataset('cnn_dailymail', '3.0.0')
 
 3. Configure config.txt file
 	
 	a. Navigate to config.txt file in dash_app folder
+
 	b. Replace the configuration parameters with the desired paths
 	
-	named_entities,/content/drive/MyDrive/aroha/eda/named_entities/
-	bart_tokenizer_cache_dir_path,/content/drive/MyDrive/aroha/bart_cache
-	bart_model_cache_dir_path,/content/drive/MyDrive/aroha/bart_cache
-	t5_tokenizer_cache_dir_path,/content/drive/MyDrive/aroha/t5_cache  
-	t5_model_cache_dir_path,/content/drive/MyDrive/aroha/t5_cache
-	t5_fine_tuned_model_path,/content/drive/MyDrive/aroha/t5_transfer_learning/model
-	llama2_access_token_path,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
-	llama2_tokenizer_cache_dir_path,/content/drive/MyDrive/aroha/llama2_cache
-	llama2_model_cache_dir_path,/content/drive/MyDrive/aroha/llama2_cache
-	peft_model_path,/content/drive/MyDrive/aroha/llama2_fine_tuned/model
-	seq2seq_encoder_model_path,/content/drive/MyDrive/aroha/seq2seq_pg/encoder_model.h5
-	seq2seq_decoder_model_path,/content/drive/MyDrive/aroha/seq2seq_pg/decoder_model.h5
-	summary_tokenizer_path,/content/drive/MyDrive/aroha/seq2seq_pg/summary_tokenizer.pickle
-	article_tokenizer_path,/content/drive/MyDrive/aroha/seq2seq_pg/article_tokenizer.pickle
-	summary_vocabulary_path,/content/drive/MyDrive/aroha/seq2seq_pg/summary_vocabulary.json
+		named_entities,/content/drive/MyDrive/aroha/eda/named_entities/
+		bart_tokenizer_cache_dir_path,/content/drive/MyDrive/aroha/bart_cache
+		bart_model_cache_dir_path,/content/drive/MyDrive/aroha/bart_cache
+		t5_tokenizer_cache_dir_path,/content/drive/MyDrive/aroha/t5_cache  
+		t5_model_cache_dir_path,/content/drive/MyDrive/aroha/t5_cache
+		t5_fine_tuned_model_path,/content/drive/MyDrive/aroha/t5_transfer_learning/model
+		llama2_access_token_path,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
+		llama2_tokenizer_cache_dir_path,/content/drive/MyDrive/aroha/llama2_cache
+		llama2_model_cache_dir_path,/content/drive/MyDrive/aroha/llama2_cache
+		peft_model_path,/content/drive/MyDrive/aroha/llama2_fine_tuned/model
+		seq2seq_encoder_model_path,/content/drive/MyDrive/aroha/seq2seq_pg/encoder_model.h5
+		seq2seq_decoder_model_path,/content/drive/MyDrive/aroha/seq2seq_pg/decoder_model.h5
+		summary_tokenizer_path,/content/drive/MyDrive/aroha/seq2seq_pg/summary_tokenizer.pickle
+		article_tokenizer_path,/content/drive/MyDrive/aroha/seq2seq_pg/article_tokenizer.pickle
+		summary_vocabulary_path,/content/drive/MyDrive/aroha/seq2seq_pg/summary_vocabulary.json
 	
 	c. Contents for "named_entities" is available in eda folder
+	
 	d. Contents for "t5_fine_tuned_model_path" ia available at "t5_fine_tuned\t5_transfer_learning\model"
+
 	e. "llama2_fine_tuned" model has been published to HuggingFace and can be downloaded directly
 
-	config = PeftConfig.from_pretrained("vijayjawali/llama2_query_tuned")
-	model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf")
-	model = PeftModel.from_pretrained(model, "vijayjawali/llama2_query_tuned")
+		config = PeftConfig.from_pretrained("vijayjawali/llama2_query_tuned")
+		model = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-chat-hf")
+		model = PeftModel.from_pretrained(model, "vijayjawali/llama2_query_tuned")
 	
 	f. Contents for summary_tokenizer_path, article_tokenizer_path and summary_vocabulary_path are avilable in seq2seq_pg folder
 	
 4. Get Llama-2 Aceess from Meta and HuggingFace
 	
 	a. Open Request Form : https://ai.meta.com/resources/models-and-libraries/llama-downloads/
+
 	b. Enter details and wait to get access, it should take 2-3 hours
+
 	c. Request the same from HuggingFace : https://huggingface.co/meta-llama
+
 	d. After having both the access, navigate to settings page in HuggingFace and create a read token: https://huggingface.co/settings/tokens
+
 	e. Replace the config parameter llama2_access_token_path with the token received
 	
 	
 5. After the configuration file is setup, navigate to dash_app folder, it contains two files, dash_app.py and run_dash_app.ipynb
 	
 	a. copy dash_app.py and place it in the execution environment
+
 	b. open run_dash_app.ipynb and navigate to last line containing python execution code
 	
-	! python /content/drive/MyDrive/aroha/dash_app/dash_app.py
+		! python /content/drive/MyDrive/aroha/dash_app/dash_app.py
 	
 	c. replace the python execution file location with dash_app.py path
+
 	d. run_dash_app executes the dash_app.py file to run dashboard application
 
 6. Get Ngrok authtoken from https://dashboard.ngrok.com/auth
 
 	a. Replace the existing token with the one generated from ngrok
 	
-	NGROK_AUTH_TOKEN = "xxxxxxxxxxxxxxxxxxxxxx" 
-	pyngrok.set_auth_token(NGROK_AUTH_TOKEN)
+		NGROK_AUTH_TOKEN = "xxxxxxxxxxxxxxxxxxxxxx" 
+		pyngrok.set_auth_token(NGROK_AUTH_TOKEN)
 
 7. Execute run_dash_app.ipynb file
 	
 	a. It is recommended to use NVIDIA A100 in colab for smooth execution.
+
 	b. Alternative T4 GPU can be used to execute.
+
 	c. Copy public url logged by ngrok
 	
-	logger.info(f"Dash app:{ngrok_tunnel.public_url}")
+		logger.info(f"Dash app:{ngrok_tunnel.public_url}")
 	
 	d. Open the copied link in browser to access dashboard application
 	
