@@ -1,0 +1,229 @@
+article,highlights,id,"('processed_article', 'sentence_tokens')",processed_article,sentence_tokens,similarity_matrix,num_retain_sentence,summary,rouge_scores
+"(CNN)Never mind cats having nine lives. A stray pooch in Washington State has used up at least three of her own after being hit by a car, apparently whacked on the head with a hammer in a misguided mercy killing and then buried in a field -- only to survive. That's according to Washington State University, where the dog -- a friendly white-and-black bully breed mix now named Theia -- has been receiving care at the Veterinary Teaching Hospital. Four days after her apparent death, the dog managed to stagger to a nearby farm, dirt-covered and emaciated, where she was found by a worker who took her to a vet for help. She was taken in by Moses Lake, Washington, resident Sara Mellado. ""Considering everything that she's been through, she's incredibly gentle and loving,"" Mellado said, according to WSU News. ""She's a true miracle dog and she deserves a good life."" Theia is only one year old but the dog's brush with death did not leave her unscathed. She suffered a dislocated jaw, leg injuries and a caved-in sinus cavity -- and still requires surgery to help her breathe. The veterinary hospital's Good Samaritan Fund committee awarded some money to help pay for the dog's treatment, but Mellado has set up a fundraising page to help meet the remaining cost of the dog's care. She's also created a Facebook page to keep supporters updated. Donors have already surpassed the $10,000 target, inspired by Theia's tale of survival against the odds. On the fundraising page, Mellado writes, ""She is in desperate need of extensive medical procedures to fix her nasal damage and reset her jaw. I agreed to foster her until she finally found a loving home."" She is dedicated to making sure Theia gets the medical attention she needs, Mellado adds, and wants to ""make sure she gets placed in a family where this will never happen to her again!"" Any additional funds raised will be ""paid forward"" to help other animals. Theia is not the only animal to apparently rise from the grave in recent weeks. A cat in Tampa, Florida, found seemingly dead after he was hit by a car in January, showed up alive in a neighbor's yard five days after he was buried by his owner. The cat was in bad shape, with maggots covering open wounds on his body and a ruined left eye, but remarkably survived with the help of treatment from the Humane Society.","Theia, a bully breed mix, was apparently hit by a car, whacked with a hammer and buried in a field .
+""She's a true miracle dog and she deserves a good life,"" says Sara Mellado, who is looking for a home for Theia .",230c522854991d053fe98a718b1defa077a8efef,"([['cnnnever', 'mind', 'cats', 'nine', 'lives'], ['stray', 'pooch', 'washington', 'state', 'used', 'least', 'three', 'hit', 'car', 'apparently', 'whacked', 'head', 'hammer', 'misguided', 'mercy', 'killing', 'buried', 'field', 'survive'], ['according', 'washington', 'state', 'university', 'dog', 'friendly', 'whiteandblack', 'bully', 'breed', 'mix', 'named', 'theia', 'receiving', 'care', 'veterinary', 'teaching', 'hospital'], ['four', 'days', 'apparent', 'death', 'dog', 'managed', 'stagger', 'nearby', 'farm', 'dirtcovered', 'emaciated', 'found', 'worker', 'took', 'vet', 'help'], ['taken', 'moses', 'lake', 'washington', 'resident', 'sara', 'mellado'], ['considering', 'everything', 'incredibly', 'gentle', 'loving', 'mellado', 'said', 'according', 'wsu', 'news'], ['true', 'miracle', 'dog', 'deserves', 'good', 'life'], ['theia', 'one', 'year', 'old', 'dogs', 'brush', 'death', 'leave', 'unscathed'], ['suffered', 'dislocated', 'jaw', 'leg', 'injuries', 'cavedin', 'sinus', 'cavity', 'still', 'requires', 'surgery', 'help', 'breathe'], ['veterinary', 'hospitals', 'good', 'samaritan', 'fund', 'committee', 'awarded', 'money', 'help', 'pay', 'dogs', 'treatment', 'mellado', 'set', 'fundraising', 'page', 'help', 'meet', 'remaining', 'cost', 'dogs', 'care'], ['also', 'created', 'facebook', 'page', 'keep', 'supporters', 'updated'], ['donors', 'already', 'surpassed', '10000', 'target', 'inspired', 'theias', 'tale', 'survival', 'odds'], ['fundraising', 'page', 'mellado', 'writes', 'desperate', 'need', 'extensive', 'medical', 'procedures', 'fix', 'nasal', 'damage', 'reset', 'jaw'], ['agreed', 'foster', 'finally', 'found', 'loving', 'home'], ['dedicated', 'making', 'sure', 'theia', 'gets', 'medical', 'attention', 'needs', 'mellado', 'adds', 'wants', 'make', 'sure', 'gets', 'placed', 'family', 'never', 'happen'], ['additional', 'funds', 'raised', 'paid', 'forward', 'help', 'animals'], ['theia', 'animal', 'apparently', 'rise', 'grave', 'recent', 'weeks'], ['cat', 'tampa', 'florida', 'found', 'seemingly', 'dead', 'hit', 'car', 'january', 'showed', 'alive', 'neighbors', 'yard', 'five', 'days', 'buried', 'owner'], ['cat', 'bad', 'shape', 'maggots', 'covering', 'open', 'wounds', 'body', 'ruined', 'left', 'eye', 'remarkably', 'survived', 'help', 'treatment', 'humane', 'society']], ['(cnn)never mind cats having nine lives.', 'a stray pooch in washington state has used up at least three of her own after being hit by a car, apparently whacked on the head with a hammer in a misguided mercy killing and then buried in a field -- only to survive.', ""that's according to washington state university, where the dog -- a friendly white-and-black bully breed mix now named theia -- has been receiving care at the veterinary teaching hospital."", 'four days after her apparent death, the dog managed to stagger to a nearby farm, dirt-covered and emaciated, where she was found by a worker who took her to a vet for help.', 'she was taken in by moses lake, washington, resident sara mellado.', '""considering everything that she\'s been through, she\'s incredibly gentle and loving,"" mellado said, according to wsu news.', '""she\'s a true miracle dog and she deserves a good life.""', ""theia is only one year old but the dog's brush with death did not leave her unscathed."", 'she suffered a dislocated jaw, leg injuries and a caved-in sinus cavity -- and still requires surgery to help her breathe.', ""the veterinary hospital's good samaritan fund committee awarded some money to help pay for the dog's treatment, but mellado has set up a fundraising page to help meet the remaining cost of the dog's care."", ""she's also created a facebook page to keep supporters updated."", ""donors have already surpassed the $10,000 target, inspired by theia's tale of survival against the odds."", 'on the fundraising page, mellado writes, ""she is in desperate need of extensive medical procedures to fix her nasal damage and reset her jaw.', 'i agreed to foster her until she finally found a loving home.""', 'she is dedicated to making sure theia gets the medical attention she needs, mellado adds, and wants to ""make sure she gets placed in a family where this will never happen to her again!""', 'any additional funds raised will be ""paid forward"" to help other animals.', 'theia is not the only animal to apparently rise from the grave in recent weeks.', ""a cat in tampa, florida, found seemingly dead after he was hit by a car in january, showed up alive in a neighbor's yard five days after he was buried by his owner."", 'the cat was in bad shape, with maggots covering open wounds on his body and a ruined left eye, but remarkably survived with the help of treatment from the humane society.'])","[['cnnnever', 'mind', 'cats', 'nine', 'lives'], ['stray', 'pooch', 'washington', 'state', 'used', 'least', 'three', 'hit', 'car', 'apparently', 'whacked', 'head', 'hammer', 'misguided', 'mercy', 'killing', 'buried', 'field', 'survive'], ['according', 'washington', 'state', 'university', 'dog', 'friendly', 'whiteandblack', 'bully', 'breed', 'mix', 'named', 'theia', 'receiving', 'care', 'veterinary', 'teaching', 'hospital'], ['four', 'days', 'apparent', 'death', 'dog', 'managed', 'stagger', 'nearby', 'farm', 'dirtcovered', 'emaciated', 'found', 'worker', 'took', 'vet', 'help'], ['taken', 'moses', 'lake', 'washington', 'resident', 'sara', 'mellado'], ['considering', 'everything', 'incredibly', 'gentle', 'loving', 'mellado', 'said', 'according', 'wsu', 'news'], ['true', 'miracle', 'dog', 'deserves', 'good', 'life'], ['theia', 'one', 'year', 'old', 'dogs', 'brush', 'death', 'leave', 'unscathed'], ['suffered', 'dislocated', 'jaw', 'leg', 'injuries', 'cavedin', 'sinus', 'cavity', 'still', 'requires', 'surgery', 'help', 'breathe'], ['veterinary', 'hospitals', 'good', 'samaritan', 'fund', 'committee', 'awarded', 'money', 'help', 'pay', 'dogs', 'treatment', 'mellado', 'set', 'fundraising', 'page', 'help', 'meet', 'remaining', 'cost', 'dogs', 'care'], ['also', 'created', 'facebook', 'page', 'keep', 'supporters', 'updated'], ['donors', 'already', 'surpassed', '10000', 'target', 'inspired', 'theias', 'tale', 'survival', 'odds'], ['fundraising', 'page', 'mellado', 'writes', 'desperate', 'need', 'extensive', 'medical', 'procedures', 'fix', 'nasal', 'damage', 'reset', 'jaw'], ['agreed', 'foster', 'finally', 'found', 'loving', 'home'], ['dedicated', 'making', 'sure', 'theia', 'gets', 'medical', 'attention', 'needs', 'mellado', 'adds', 'wants', 'make', 'sure', 'gets', 'placed', 'family', 'never', 'happen'], ['additional', 'funds', 'raised', 'paid', 'forward', 'help', 'animals'], ['theia', 'animal', 'apparently', 'rise', 'grave', 'recent', 'weeks'], ['cat', 'tampa', 'florida', 'found', 'seemingly', 'dead', 'hit', 'car', 'january', 'showed', 'alive', 'neighbors', 'yard', 'five', 'days', 'buried', 'owner'], ['cat', 'bad', 'shape', 'maggots', 'covering', 'open', 'wounds', 'body', 'ruined', 'left', 'eye', 'remarkably', 'survived', 'help', 'treatment', 'humane', 'society']]","['(cnn)never mind cats having nine lives.', 'a stray pooch in washington state has used up at least three of her own after being hit by a car, apparently whacked on the head with a hammer in a misguided mercy killing and then buried in a field -- only to survive.', ""that's according to washington state university, where the dog -- a friendly white-and-black bully breed mix now named theia -- has been receiving care at the veterinary teaching hospital."", 'four days after her apparent death, the dog managed to stagger to a nearby farm, dirt-covered and emaciated, where she was found by a worker who took her to a vet for help.', 'she was taken in by moses lake, washington, resident sara mellado.', '""considering everything that she\'s been through, she\'s incredibly gentle and loving,"" mellado said, according to wsu news.', '""she\'s a true miracle dog and she deserves a good life.""', ""theia is only one year old but the dog's brush with death did not leave her unscathed."", 'she suffered a dislocated jaw, leg injuries and a caved-in sinus cavity -- and still requires surgery to help her breathe.', ""the veterinary hospital's good samaritan fund committee awarded some money to help pay for the dog's treatment, but mellado has set up a fundraising page to help meet the remaining cost of the dog's care."", ""she's also created a facebook page to keep supporters updated."", ""donors have already surpassed the $10,000 target, inspired by theia's tale of survival against the odds."", 'on the fundraising page, mellado writes, ""she is in desperate need of extensive medical procedures to fix her nasal damage and reset her jaw.', 'i agreed to foster her until she finally found a loving home.""', 'she is dedicated to making sure theia gets the medical attention she needs, mellado adds, and wants to ""make sure she gets placed in a family where this will never happen to her again!""', 'any additional funds raised will be ""paid forward"" to help other animals.', 'theia is not the only animal to apparently rise from the grave in recent weeks.', ""a cat in tampa, florida, found seemingly dead after he was hit by a car in january, showed up alive in a neighbor's yard five days after he was buried by his owner."", 'the cat was in bad shape, with maggots covering open wounds on his body and a ruined left eye, but remarkably survived with the help of treatment from the humane society.']","[[1.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.        ]
+ [0.         1.         0.0865347  0.         0.0606225  0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.07339618 0.14041173
+  0.        ]
+ [0.         0.0865347  1.         0.04294301 0.06575958 0.06662462
+  0.06975774 0.04771955 0.         0.0876234  0.         0.
+  0.         0.         0.0297524  0.         0.05401491 0.
+  0.        ]
+ [0.         0.         0.04294301 1.         0.         0.
+  0.07125079 0.07184203 0.03377627 0.05179608 0.         0.
+  0.         0.07125079 0.         0.04649786 0.         0.09392599
+  0.02952623]
+ [0.         0.0606225  0.06575958 0.         1.         0.06030844
+  0.         0.         0.         0.03965824 0.         0.
+  0.05137994 0.         0.03969632 0.         0.         0.
+  0.        ]
+ [0.         0.         0.06662462 0.         0.06030844 1.
+  0.         0.         0.         0.03259644 0.         0.
+  0.0422309  0.11054319 0.03262774 0.         0.         0.
+  0.        ]
+ [0.         0.         0.06975774 0.07125079 0.         0.
+  1.         0.         0.         0.07269211 0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.        ]
+ [0.         0.         0.04771955 0.07184203 0.         0.
+  0.         1.         0.         0.11892336 0.         0.
+  0.         0.         0.04038026 0.         0.07330958 0.
+  0.        ]
+ [0.         0.         0.         0.03377627 0.         0.
+  0.         0.         1.         0.05591139 0.         0.
+  0.06258223 0.         0.         0.05019222 0.         0.
+  0.03187216]
+ [0.         0.         0.0876234  0.05179608 0.03965824 0.03259644
+  0.07269211 0.11892336 0.05591139 1.         0.05321411 0.
+  0.11468416 0.         0.02145568 0.07697002 0.         0.
+  0.09110281]
+ [0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.05321411 1.         0.
+  0.0689425  0.         0.         0.         0.         0.
+  0.        ]
+ [0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         1.
+  0.         0.         0.         0.         0.         0.
+  0.        ]
+ [0.         0.         0.         0.         0.05137994 0.0422309
+  0.         0.         0.06258223 0.11468416 0.0689425  0.
+  1.         0.         0.07582846 0.         0.         0.
+  0.        ]
+ [0.         0.         0.         0.07125079 0.         0.11054319
+  0.         0.         0.         0.         0.         0.
+  0.         1.         0.         0.         0.         0.0683385
+  0.        ]
+ [0.         0.         0.0297524  0.         0.03969632 0.03262774
+  0.         0.04038026 0.         0.02145568 0.         0.
+  0.07582846 0.         1.         0.         0.04570739 0.
+  0.        ]
+ [0.         0.         0.         0.04649786 0.         0.
+  0.         0.         0.05019222 0.07697002 0.         0.
+  0.         0.         0.         1.         0.         0.
+  0.04387658]
+ [0.         0.07339618 0.05401491 0.         0.         0.
+  0.         0.07330958 0.         0.         0.         0.
+  0.         0.         0.04570739 0.         1.         0.
+  0.        ]
+ [0.         0.14041173 0.         0.09392599 0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.0683385  0.         0.         0.         1.
+  0.04893328]
+ [0.         0.         0.         0.02952623 0.         0.
+  0.         0.         0.03187216 0.09110281 0.         0.
+  0.         0.         0.         0.04387658 0.         0.04893328
+  1.        ]]",2,"the veterinary hospital's good samaritan fund committee awarded some money to help pay for the dog's treatment, but mellado has set up a fundraising page to help meet the remaining cost of the dog's care.that's according to washington state university, where the dog -- a friendly white-and-black bully breed mix now named theia -- has been receiving care at the veterinary teaching hospital.","[{'rouge-1': {'r': 0.17647058823529413, 'p': 0.12, 'f': 0.14285713803854888}, 'rouge-2': {'r': 0.024390243902439025, 'p': 0.016666666666666666, 'f': 0.01980197537496441}, 'rouge-l': {'r': 0.17647058823529413, 'p': 0.12, 'f': 0.14285713803854888}}]"
+"(CNN)He's a blue chip college basketball recruit. She's a high school freshman with Down syndrome. At first glance Trey Moses and Ellie Meredith couldn't be more different. But all that changed Thursday when Trey asked Ellie to be his prom date. Trey -- a star on Eastern High School's basketball team in Louisville, Kentucky, who's headed to play college ball next year at Ball State -- was originally going to take his girlfriend to Eastern's prom. So why is he taking Ellie instead? ""She's great... she listens and she's easy to talk to"" he said. Trey made the prom-posal (yes, that's what they are calling invites to prom these days) in the gym during Ellie's P.E. class. Trina Helson, a teacher at Eastern, alerted the school's newspaper staff to the prom-posal and posted photos of Trey and Ellie on Twitter that have gone viral. She wasn't surpristed by Trey's actions. ""That's the kind of person Trey is,"" she said. To help make sure she said yes, Trey entered the gym armed with flowers and a poster that read ""Let's Party Like it's 1989,"" a reference to the latest album by Taylor Swift, Ellie's favorite singer. Trey also got the OK from Ellie's parents the night before via text. They were thrilled. ""You just feel numb to those moments raising a special needs child,""  said Darla Meredith, Ellie's mom. ""You first feel the need to protect and then to overprotect."" Darla Meredith said Ellie has struggled with friendships since elementary school, but a special program at Eastern called Best Buddies had made things easier for her. She said Best Buddies cultivates friendships between students with and without developmental disabilities and prevents students like Ellie from feeling isolated and left out of social functions. ""I guess around middle school is when kids started to care about what others thought,"" she said, but ""this school, this year has been a relief."" Trey's future coach at Ball State, James Whitford, said he felt great about the prom-posal, noting that Trey, whom he's known for a long time, often works with other kids . Trey's mother, Shelly Moses, was also proud of her son. ""It's exciting to bring awareness to a good cause,"" she said. ""Trey has worked pretty hard, and he's a good son."" Both Trey and Ellie have a lot of planning to do. Trey is looking to take up special education as a college major, in addition to playing basketball in the fall. As for Ellie, she can't stop thinking about prom. ""Ellie can't wait to go dress shopping"" her mother said. ""Because I've only told about a million people!"" Ellie interjected.","College-bound basketball star asks girl with Down syndrome to high school prom .
+Pictures of the two during the ""prom-posal"" have gone viral .",1b2cc634e2bfc6f2595260e7ed9b42f77ecbb0ce,"([['cnnhes', 'blue', 'chip', 'college', 'basketball', 'recruit'], ['high', 'school', 'freshman', 'syndrome'], ['first', 'glance', 'trey', 'moses', 'ellie', 'meredith', 'could', 'different'], ['changed', 'thursday', 'trey', 'asked', 'ellie', 'prom', 'date'], ['trey', 'star', 'eastern', 'high', 'schools', 'basketball', 'team', 'louisville', 'kentucky', 'headed', 'play', 'college', 'ball', 'next', 'year', 'ball', 'state', 'originally', 'going', 'take', 'girlfriend', 'easterns', 'prom'], ['taking', 'ellie', 'instead'], ['great', 'listens', 'easy', 'talk', 'said'], ['trey', 'made', 'promposal', 'yes', 'calling', 'invites', 'prom', 'days', 'gym', 'ellies', 'pe'], ['class'], ['trina', 'helson', 'teacher', 'eastern', 'alerted', 'schools', 'newspaper', 'staff', 'promposal', 'posted', 'photos', 'trey', 'ellie', 'twitter', 'gone', 'viral'], ['surpristed', 'treys', 'actions'], ['kind', 'person', 'trey', 'said'], ['help', 'make', 'sure', 'said', 'yes', 'trey', 'entered', 'gym', 'armed', 'flowers', 'poster', 'read', 'let', 'us', 'party', 'like', '1989', 'reference', 'latest', 'album', 'taylor', 'swift', 'ellies', 'favorite', 'singer'], ['trey', 'also', 'got', 'ok', 'ellies', 'parents', 'night', 'via', 'text'], ['thrilled'], ['feel', 'numb', 'moments', 'raising', 'special', 'needs', 'child', 'said', 'darla', 'meredith', 'ellies', 'mom'], ['first', 'feel', 'need', 'protect', 'overprotect'], ['darla', 'meredith', 'said', 'ellie', 'struggled', 'friendships', 'since', 'elementary', 'school', 'special', 'program', 'eastern', 'called', 'best', 'buddies', 'made', 'things', 'easier'], ['said', 'best', 'buddies', 'cultivates', 'friendships', 'students', 'without', 'developmental', 'disabilities', 'prevents', 'students', 'like', 'ellie', 'feeling', 'isolated', 'left', 'social', 'functions'], ['guess', 'around', 'middle', 'school', 'kids', 'started', 'care', 'others', 'thought', 'said', 'school', 'year', 'relief'], ['treys', 'future', 'coach', 'ball', 'state', 'james', 'whitford', 'said', 'felt', 'great', 'promposal', 'noting', 'trey', 'hes', 'known', 'long', 'time', 'often', 'works', 'kids'], ['treys', 'mother', 'shelly', 'moses', 'also', 'proud', 'son'], ['exciting', 'bring', 'awareness', 'good', 'said'], ['trey', 'worked', 'pretty', 'hard', 'hes', 'good', 'son'], ['trey', 'ellie', 'lot', 'planning'], ['trey', 'looking', 'take', 'special', 'education', 'college', 'major', 'addition', 'playing', 'basketball', 'fall'], ['ellie', 'stop', 'thinking', 'prom'], ['ellie', 'wait', 'go', 'dress', 'shopping', 'mother', 'said'], ['told', 'million', 'people'], ['ellie', 'interjected']], [""(cnn)he's a blue chip college basketball recruit."", ""she's a high school freshman with down syndrome."", ""at first glance trey moses and ellie meredith couldn't be more different."", 'but all that changed thursday when trey asked ellie to be his prom date.', ""trey -- a star on eastern high school's basketball team in louisville, kentucky, who's headed to play college ball next year at ball state -- was originally going to take his girlfriend to eastern's prom."", 'so why is he taking ellie instead?', '""she\'s great... she listens and she\'s easy to talk to"" he said.', ""trey made the prom-posal (yes, that's what they are calling invites to prom these days) in the gym during ellie's p.e."", 'class.', ""trina helson, a teacher at eastern, alerted the school's newspaper staff to the prom-posal and posted photos of trey and ellie on twitter that have gone viral."", ""she wasn't surpristed by trey's actions."", '""that\'s the kind of person trey is,"" she said.', 'to help make sure she said yes, trey entered the gym armed with flowers and a poster that read ""let\'s party like it\'s 1989,"" a reference to the latest album by taylor swift, ellie\'s favorite singer.', ""trey also got the ok from ellie's parents the night before via text."", 'they were thrilled.', '""you just feel numb to those moments raising a special needs child,""  said darla meredith, ellie\'s mom.', '""you first feel the need to protect and then to overprotect.""', 'darla meredith said ellie has struggled with friendships since elementary school, but a special program at eastern called best buddies had made things easier for her.', 'she said best buddies cultivates friendships between students with and without developmental disabilities and prevents students like ellie from feeling isolated and left out of social functions.', '""i guess around middle school is when kids started to care about what others thought,"" she said, but ""this school, this year has been a relief.""', ""trey's future coach at ball state, james whitford, said he felt great about the prom-posal, noting that trey, whom he's known for a long time, often works with other kids ."", ""trey's mother, shelly moses, was also proud of her son."", '""it\'s exciting to bring awareness to a good cause,"" she said.', '""trey has worked pretty hard, and he\'s a good son.""', 'both trey and ellie have a lot of planning to do.', 'trey is looking to take up special education as a college major, in addition to playing basketball in the fall.', ""as for ellie, she can't stop thinking about prom."", '""ellie can\'t wait to go dress shopping"" her mother said.', '""because i\'ve only told about a million people!""', 'ellie interjected.'])","[['cnnhes', 'blue', 'chip', 'college', 'basketball', 'recruit'], ['high', 'school', 'freshman', 'syndrome'], ['first', 'glance', 'trey', 'moses', 'ellie', 'meredith', 'could', 'different'], ['changed', 'thursday', 'trey', 'asked', 'ellie', 'prom', 'date'], ['trey', 'star', 'eastern', 'high', 'schools', 'basketball', 'team', 'louisville', 'kentucky', 'headed', 'play', 'college', 'ball', 'next', 'year', 'ball', 'state', 'originally', 'going', 'take', 'girlfriend', 'easterns', 'prom'], ['taking', 'ellie', 'instead'], ['great', 'listens', 'easy', 'talk', 'said'], ['trey', 'made', 'promposal', 'yes', 'calling', 'invites', 'prom', 'days', 'gym', 'ellies', 'pe'], ['class'], ['trina', 'helson', 'teacher', 'eastern', 'alerted', 'schools', 'newspaper', 'staff', 'promposal', 'posted', 'photos', 'trey', 'ellie', 'twitter', 'gone', 'viral'], ['surpristed', 'treys', 'actions'], ['kind', 'person', 'trey', 'said'], ['help', 'make', 'sure', 'said', 'yes', 'trey', 'entered', 'gym', 'armed', 'flowers', 'poster', 'read', 'let', 'us', 'party', 'like', '1989', 'reference', 'latest', 'album', 'taylor', 'swift', 'ellies', 'favorite', 'singer'], ['trey', 'also', 'got', 'ok', 'ellies', 'parents', 'night', 'via', 'text'], ['thrilled'], ['feel', 'numb', 'moments', 'raising', 'special', 'needs', 'child', 'said', 'darla', 'meredith', 'ellies', 'mom'], ['first', 'feel', 'need', 'protect', 'overprotect'], ['darla', 'meredith', 'said', 'ellie', 'struggled', 'friendships', 'since', 'elementary', 'school', 'special', 'program', 'eastern', 'called', 'best', 'buddies', 'made', 'things', 'easier'], ['said', 'best', 'buddies', 'cultivates', 'friendships', 'students', 'without', 'developmental', 'disabilities', 'prevents', 'students', 'like', 'ellie', 'feeling', 'isolated', 'left', 'social', 'functions'], ['guess', 'around', 'middle', 'school', 'kids', 'started', 'care', 'others', 'thought', 'said', 'school', 'year', 'relief'], ['treys', 'future', 'coach', 'ball', 'state', 'james', 'whitford', 'said', 'felt', 'great', 'promposal', 'noting', 'trey', 'hes', 'known', 'long', 'time', 'often', 'works', 'kids'], ['treys', 'mother', 'shelly', 'moses', 'also', 'proud', 'son'], ['exciting', 'bring', 'awareness', 'good', 'said'], ['trey', 'worked', 'pretty', 'hard', 'hes', 'good', 'son'], ['trey', 'ellie', 'lot', 'planning'], ['trey', 'looking', 'take', 'special', 'education', 'college', 'major', 'addition', 'playing', 'basketball', 'fall'], ['ellie', 'stop', 'thinking', 'prom'], ['ellie', 'wait', 'go', 'dress', 'shopping', 'mother', 'said'], ['told', 'million', 'people'], ['ellie', 'interjected']]","[""(cnn)he's a blue chip college basketball recruit."", ""she's a high school freshman with down syndrome."", ""at first glance trey moses and ellie meredith couldn't be more different."", 'but all that changed thursday when trey asked ellie to be his prom date.', ""trey -- a star on eastern high school's basketball team in louisville, kentucky, who's headed to play college ball next year at ball state -- was originally going to take his girlfriend to eastern's prom."", 'so why is he taking ellie instead?', '""she\'s great... she listens and she\'s easy to talk to"" he said.', ""trey made the prom-posal (yes, that's what they are calling invites to prom these days) in the gym during ellie's p.e."", 'class.', ""trina helson, a teacher at eastern, alerted the school's newspaper staff to the prom-posal and posted photos of trey and ellie on twitter that have gone viral."", ""she wasn't surpristed by trey's actions."", '""that\'s the kind of person trey is,"" she said.', 'to help make sure she said yes, trey entered the gym armed with flowers and a poster that read ""let\'s party like it\'s 1989,"" a reference to the latest album by taylor swift, ellie\'s favorite singer.', ""trey also got the ok from ellie's parents the night before via text."", 'they were thrilled.', '""you just feel numb to those moments raising a special needs child,""  said darla meredith, ellie\'s mom.', '""you first feel the need to protect and then to overprotect.""', 'darla meredith said ellie has struggled with friendships since elementary school, but a special program at eastern called best buddies had made things easier for her.', 'she said best buddies cultivates friendships between students with and without developmental disabilities and prevents students like ellie from feeling isolated and left out of social functions.', '""i guess around middle school is when kids started to care about what others thought,"" she said, but ""this school, this year has been a relief.""', ""trey's future coach at ball state, james whitford, said he felt great about the prom-posal, noting that trey, whom he's known for a long time, often works with other kids ."", ""trey's mother, shelly moses, was also proud of her son."", '""it\'s exciting to bring awareness to a good cause,"" she said.', '""trey has worked pretty hard, and he\'s a good son.""', 'both trey and ellie have a lot of planning to do.', 'trey is looking to take up special education as a college major, in addition to playing basketball in the fall.', ""as for ellie, she can't stop thinking about prom."", '""ellie can\'t wait to go dress shopping"" her mother said.', '""because i\'ve only told about a million people!""', 'ellie interjected.']","[[1.         0.         0.         0.         0.12560805 0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.19133215 0.         0.         0.         0.        ]
+ [0.         1.         0.         0.         0.09335518 0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.09463696
+  0.         0.20156127 0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.        ]
+ [0.         0.         1.         0.10021527 0.02263837 0.08118002
+  0.         0.03568346 0.         0.06131134 0.         0.06496525
+  0.02185245 0.03756412 0.         0.08811553 0.15408118 0.10570288
+  0.02918004 0.         0.02525358 0.1365563  0.         0.04366874
+  0.14206264 0.03448383 0.07265963 0.05299883 0.         0.10804743]
+ [0.         0.         0.10021527 1.         0.07915122 0.08643351
+  0.         0.12476119 0.         0.06527904 0.         0.06916942
+  0.02326661 0.03999505 0.         0.         0.         0.03473009
+  0.03106839 0.         0.02688784 0.         0.         0.04649473
+  0.1512561  0.03671542 0.22623946 0.0564286  0.         0.11503962]
+ [0.12560805 0.09335518 0.02263837 0.07915122 1.         0.
+  0.         0.06162962 0.         0.10091693 0.         0.03416835
+  0.01149325 0.01975678 0.         0.         0.         0.03843824
+  0.         0.04902603 0.14017581 0.         0.         0.0229675
+  0.03416835 0.17234296 0.07354272 0.         0.         0.        ]
+ [0.         0.         0.08118002 0.08643351 0.         1.
+  0.         0.         0.         0.0528797  0.         0.
+  0.         0.         0.         0.         0.         0.05183957
+  0.04637397 0.         0.         0.         0.         0.
+  0.12252596 0.         0.11547331 0.08422765 0.         0.17171287]
+ [0.         0.         0.         0.         0.         0.
+  1.         0.         0.         0.         0.         0.09179335
+  0.03087665 0.         0.         0.04682484 0.         0.03883689
+  0.0347422  0.04135812 0.13143423 0.         0.07241087 0.
+  0.         0.         0.         0.06310122 0.         0.        ]
+ [0.         0.         0.03568346 0.12476119 0.06162962 0.
+  0.         1.         0.         0.08504729 0.         0.05385747
+  0.17487472 0.10226279 0.         0.06274415 0.         0.07256587
+  0.         0.         0.07660222 0.         0.         0.03620225
+  0.05385747 0.02858778 0.11592087 0.         0.         0.        ]
+ [0.         0.         0.         0.         0.         0.
+  0.         0.         1.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.        ]
+ [0.         0.         0.06131134 0.06527904 0.10091693 0.0528797
+  0.         0.08504729 0.         1.         0.         0.0423176
+  0.01423442 0.02446883 0.         0.         0.         0.06885361
+  0.01900753 0.         0.06018889 0.         0.         0.0284453
+  0.09253792 0.02246236 0.04732962 0.03452281 0.         0.07038082]
+ [0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         1.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.0990787  0.16823487 0.         0.
+  0.         0.         0.         0.         0.         0.        ]
+ [0.         0.         0.06496525 0.06916942 0.03416835 0.
+  0.09179335 0.05385747 0.         0.0423176  0.         1.
+  0.07212367 0.05669598 0.         0.05935862 0.         0.04923251
+  0.04404177 0.0524286  0.08334904 0.         0.09179335 0.06590975
+  0.09805282 0.05204686 0.         0.07999176 0.         0.        ]
+ [0.         0.         0.02185245 0.02326661 0.01149325 0.
+  0.03087665 0.17487472 0.         0.01423442 0.         0.07212367
+  1.         0.06262543 0.         0.05839086 0.         0.0165604
+  0.05456815 0.01763548 0.02803623 0.         0.03087665 0.02217015
+  0.03298216 0.01750707 0.         0.02690693 0.         0.        ]
+ [0.         0.         0.03756412 0.03999505 0.01975678 0.
+  0.         0.10226279 0.         0.02446883 0.         0.05669598
+  0.06262543 1.         0.         0.06605101 0.         0.
+  0.         0.         0.02203911 0.11917437 0.         0.03811025
+  0.05669598 0.03009447 0.         0.         0.         0.        ]
+ [0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         1.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.        ]
+ [0.         0.         0.08811553 0.         0.         0.
+  0.04682484 0.06274415 0.         0.         0.         0.05935862
+  0.05839086 0.06605101 0.         1.         0.11862977 0.2050434
+  0.02246621 0.02674443 0.02307414 0.         0.04682484 0.
+  0.         0.07059368 0.         0.04080472 0.         0.        ]
+ [0.         0.         0.15408118 0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.11862977 1.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.        ]
+ [0.         0.09463696 0.10570288 0.03473009 0.03843824 0.05183957
+  0.03883689 0.07256587 0.         0.06885361 0.         0.04923251
+  0.0165604  0.         0.         0.2050434  0.         1.
+  0.18727512 0.12158038 0.01913787 0.         0.03883689 0.
+  0.04923251 0.05855095 0.04639866 0.0676875  0.         0.06899644]
+ [0.         0.         0.02918004 0.03106839 0.         0.04637397
+  0.0347422  0.         0.         0.01900753 0.         0.04404177
+  0.05456815 0.         0.         0.02246621 0.         0.18727512
+  1.         0.01984332 0.01712011 0.         0.0347422  0.
+  0.04404177 0.         0.04150671 0.060551   0.         0.06172193]
+ [0.         0.20156127 0.         0.         0.04902603 0.
+  0.04135812 0.         0.         0.         0.         0.0524286
+  0.01763548 0.         0.         0.02674443 0.         0.12158038
+  0.01984332 1.         0.07506985 0.         0.04135812 0.
+  0.         0.         0.         0.03604083 0.         0.        ]
+ [0.         0.         0.02525358 0.02688784 0.14017581 0.
+  0.13143423 0.07660222 0.         0.06018889 0.0990787  0.08334904
+  0.02803623 0.02203911 0.         0.02307414 0.         0.01913787
+  0.01712011 0.07506985 1.         0.06689375 0.03568231 0.10721216
+  0.03811552 0.02023188 0.         0.03109474 0.         0.        ]
+ [0.         0.         0.1365563  0.         0.         0.
+  0.         0.         0.         0.         0.16823487 0.
+  0.         0.11917437 0.         0.         0.         0.
+  0.         0.         0.06689375 1.         0.         0.13854163
+  0.         0.         0.         0.14168285 0.         0.        ]
+ [0.         0.         0.         0.         0.         0.
+  0.07241087 0.         0.         0.         0.         0.09179335
+  0.03087665 0.         0.         0.04682484 0.         0.03883689
+  0.0347422  0.04135812 0.03568231 0.         1.         0.16557522
+  0.         0.         0.         0.06310122 0.         0.        ]
+ [0.         0.         0.04366874 0.04649473 0.0229675  0.
+  0.         0.03620225 0.         0.0284453  0.         0.06590975
+  0.02217015 0.03811025 0.         0.         0.         0.
+  0.         0.         0.10721216 0.13854163 0.16557522 1.
+  0.06590975 0.03498518 0.         0.         0.         0.        ]
+ [0.         0.         0.14206264 0.1512561  0.03416835 0.12252596
+  0.         0.05385747 0.         0.09253792 0.         0.09805282
+  0.03298216 0.05669598 0.         0.         0.         0.04923251
+  0.04404177 0.         0.03811552 0.         0.         0.06590975
+  1.         0.05204686 0.10966604 0.07999176 0.         0.16307726]
+ [0.19133215 0.         0.03448383 0.03671542 0.17234296 0.
+  0.         0.02858778 0.         0.02246236 0.         0.05204686
+  0.01750707 0.03009447 0.         0.07059368 0.         0.05855095
+  0.         0.         0.02023188 0.         0.         0.03498518
+  0.05204686 1.         0.         0.         0.         0.        ]
+ [0.         0.         0.07265963 0.22623946 0.07354272 0.11547331
+  0.         0.11592087 0.         0.04732962 0.         0.
+  0.         0.         0.         0.         0.         0.04639866
+  0.04150671 0.         0.         0.         0.         0.
+  0.10966604 0.         1.         0.07538739 0.         0.15369046]
+ [0.         0.         0.05299883 0.0564286  0.         0.08422765
+  0.06310122 0.         0.         0.03452281 0.         0.07999176
+  0.02690693 0.         0.         0.04080472 0.         0.0676875
+  0.060551   0.03604083 0.03109474 0.14168285 0.06310122 0.
+  0.07999176 0.         0.07538739 1.         0.         0.11210371]
+ [0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         0.         0.
+  0.         0.         0.         0.         1.         0.        ]
+ [0.         0.         0.10804743 0.11503962 0.         0.17171287
+  0.         0.         0.         0.07038082 0.         0.
+  0.         0.         0.         0.         0.         0.06899644
+  0.06172193 0.         0.         0.         0.         0.
+  0.16307726 0.         0.15369046 0.11210371 0.         1.        ]]",3,"darla meredith said ellie has struggled with friendships since elementary school, but a special program at eastern called best buddies had made things easier for her.at first glance trey moses and ellie meredith couldn't be more different.both trey and ellie have a lot of planning to do.","[{'rouge-1': {'r': 0.19047619047619047, 'p': 0.09523809523809523, 'f': 0.1269841225396827}, 'rouge-2': {'r': 0.0, 'p': 0.0, 'f': 0.0}, 'rouge-l': {'r': 0.14285714285714285, 'p': 0.07142857142857142, 'f': 0.095238090793651}}]"
