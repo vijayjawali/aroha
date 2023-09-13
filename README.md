@@ -1,3 +1,45 @@
+# Multi-Document Text Summarization of News Articles
+
+This project implements a pipeline for multi-document summarization of news articles using extractive and abstractive techniques. It includes comprehensive evaluation of various summarization methods and an interactive web dashboard.
+
+## Overview
+
+- Automatically generates summaries of news articles covering a common event by extracting salient information from multiple document sources  
+- Implements and evaluates extractive summarization methods like TF-IDF, TextRank, LSA
+- Implements and evaluates abstractive summarization with pointer-generator seq2seq, T5, BART and LLAMA-2
+- Compares off-the-shelf versus fine-tuned versions of models like T5 and LLAMA-2   
+- Assesses models using ROUGE metrics, METEOR score and human evaluation
+- Develops web dashboard with entity search, event summarization, and article summarization features   
+
+## Extractive Methods
+
+- **TF-IDF:** Scores sentences based on frequency of words in the document vs corpus
+- **TextRank:** Graph-based algorithm that computes sentence importance based on similarity graph  
+- **LSA:** Uncovers semantic relationships between words/sentences via matrix decomposition   
+
+## Abstractive Methods
+
+- **Seq2seq + Pointer Generator:** Encoder-decoder RNN with copying mechanism
+- **T5:** Pretrained Transformer encoder-decoder model
+- **BART:** Denoising sequence-to-sequence pretrained Transformer 
+- **LLAMA-2:** 7 billion parameter autoregressive language model
+
+## Dashboard
+
+Interactive web application with:
+
+- Entity search with auto-complete suggestions
+- Event summarization combining articles related to an entity   
+- Topic summarization with model selection and email
+- Custom article summarization with length control
+
+## Evaluation  
+
+- **ROUGE:** Recall-oriented understudy for gisting evaluation
+- **METEOR:** Metric for evaluation of translation with explicit ordering   
+- Human evaluation of coherence, redundancy, fluency and topic coverage
+
+## Folder Structure
 The Following flow represents the folder structure of the project 
 
 				aroha
