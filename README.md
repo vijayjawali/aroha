@@ -217,6 +217,7 @@ The Following flow represents the folder structure of the project
 						meteor_scores.csv
 						metrics.ipynb
 
+## Running the Project
 1. Fist step is to install the following python libraries from the pip command
 
 		python -m pip install -U pip
